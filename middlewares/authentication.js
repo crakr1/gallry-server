@@ -7,7 +7,7 @@ const isLoggedIn = (req, res, next) => {
         try{
             const deCoded = jwt.verify(token, process.env.JWT)
             req.user = deCoded
-            next()        
+            return res.status(200).json({user: deCoded})
         } catch(e) {
             return res.status(401).json({message: "token undefined"})
         }

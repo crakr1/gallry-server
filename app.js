@@ -34,5 +34,6 @@ mongoose
 //routers 
 app.use(express.json());
 
+app.use('*/images',express.static(process.cwd() + '/public/images'));
 
 app.use('/api', router)

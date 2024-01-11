@@ -6,22 +6,21 @@ import path from "path"
 
 //create post 
 export const createPost = async(req, res) => {
-    const pathImage = path.join(process.cwd(), `../images${req.file.filename}`)
-    const userId = req.params.userId
-    const {title, description } = req.body
-
-    const newPost = new Post({
-        title: title,
-        description: description,
-        image: pathImage,
-        userId: userId 
-    })
-
+    const url = req.protocol + '://' + req.get('host')
     try {
+        const userId = req.params.userId
+        const {title, description } = req.body
+        const newPost = new Post({
+            title: title,
+            description: description,
+            image: url+ '/public/images/' + req.file.filename,
+            userId: userId 
+        })
         await newPost.save()
         res.status(200).json(newPost)
+        console.log(req.file)
     }catch(e) {
-        res.status(500).json({message: err.message})
+        res.status(500).json(e)
     }
 }
 
@@ -44,7 +43,7 @@ export const getPost = async (req, res) => {
         res.status(200).json(post)
 
     } catch (e) {
-        res.status(500).json(e)
+        res.status(500).json({message: "not faund"})
     }
 }
 

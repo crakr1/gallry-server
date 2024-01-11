@@ -26,14 +26,14 @@ router.post('/login', login)
 
 //post controllers
 router.get('/posts', getPosts)
-router.get('/post/:postId', getPost)
-router.get('/myPost/:userId',isLoggedIn, getMyPost)
-router.put('/post/update/:userId/:postId',isLoggedIn, updatePost)
-router.delete('/post/delete/:userId/:postId',isLoggedIn, deletePost)
-router.post('/post/create/:userId',isLoggedIn, upload.single("image"), createPost)
+router.get('/posts/:postId', getPost)
+router.get('/my/posts/:userId', getMyPost)
+router.put('/post/update/:userId/:postId', updatePost)
+router.delete('/post/delete/:userId/:postId', deletePost)
+router.post('/post/create/:userId', upload.single("image"), createPost)
 
 // like post controllers
-router.put('/post/like/:userId/:postId', isLoggedIn, like)
+router.put('/post/like/:userId/:postId', like)
 
 
 export default router
